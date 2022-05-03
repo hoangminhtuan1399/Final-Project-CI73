@@ -1,0 +1,75 @@
+@keyframes sparkle {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.fish__screen {
+    height: 80vh;
+    width: 120vh;
+    background-color: #D2C9E0;
+    color: black;
+    position: relative;
+    border-radius: 10px;
+    border: 2px solid black;
+    overflow: hidden;
+    font-size: 62.5%;
+    animation: fadein 0.6s ease-in 0s 1 normal forwards;
+}
+
+.fish__screen > span {
+    position: absolute;
+    font-size: 2rem;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    animation: sparkle 0.7s linear 0s infinite alternate none;
+}
+
+.fish__ground {
+    height: 16vh;
+    background-color: #4A4453;
+    position: relative;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.dust__dot {
+    position: absolute;
+    background-color: wheat;
+}
+
+.fish__sky {
+    height: 64vh;
+    background-color: whitesmoke;
+    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.fish__score {
+    position: absolute;
+    font-size: 1rem;
+    top: 2%;
+    left: 75%;
+}
+
+.fish__highscore {
+    position: absolute;
+    top: 6%;
+    left: 75%;
+    font-size: 1rem;
+}
+
+.fish__dot {
+    position: absolute;
+    background-color: black;
+}

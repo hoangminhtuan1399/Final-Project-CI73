@@ -1,0 +1,172 @@
+@keyframes movedown {
+    0% {
+        left: 0;
+        top: 0;
+    }
+
+    100% {
+        left: 0;
+        top: 10%
+    }
+}
+
+@keyframes fadein {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@keyframes sparkling {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.1;
+    }
+}
+
+.index {
+    text-align: center;
+    font-size: 1rem;
+}
+
+.game__screen {
+    height: 80vh;
+    width: 80vh;
+    background-color: black;
+    position: relative;
+    border-radius: 10px;
+    color: white;
+    overflow: hidden;
+    border: 3px solid white;
+}
+
+.game__score {
+    position: absolute;
+    top: 2%;
+    right: 5%;
+    color: white;
+}
+
+.game__highscore {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    color: white;
+}
+
+.game__over--screen {
+    height: 80vh;
+    width: 80vh;
+    background-color: transparent;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 2.6rem;
+}
+
+.game__over--screen h1 {
+    transform: translateY(3rem);
+    animation: fadein 1s ease-in 0s 1 normal forwards;
+}
+
+.game__over--screen h2 {
+    font-size: 1.7rem;
+    cursor: pointer;
+    animation: 
+        fadein 1.8s ease 1.2s 1 normal both,
+        sparkling 0.5s linear 2.2s infinite alternate none;
+}
+
+.snake__dot {
+    position: absolute;
+    height: 2%;
+    width: 2%;
+    background-color: white;
+    display: inline;
+    border-radius: 3px;
+    border: 1px solid black;
+}
+
+.food__dot {
+    position: absolute;
+    height: 2%;
+    width: 2%;
+    border-radius: 5px;
+    background-color: red;
+    display: inline;
+}
+
+.game__menu {
+    height: 80vh;
+    width: 80vh;
+    position: relative;
+    background-color: transparent;
+    border-radius: 10px;
+    color: white;
+}
+
+.game__article {
+    position: absolute;
+    font-size: 3rem;
+    animation: movedown 1.5s ease-out 0s 1 normal forwards;
+}
+
+.game__menu h2 {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    user-select: none;
+    cursor: pointer;
+    animation: 
+        fadein 1.5s ease 2s 1 normal both,
+        sparkling 0.7s linear 3s infinite alternate none;
+}
+
+.game__option {
+    visibility: hidden;
+    width: 65%;
+    height: 20%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem;
+    border: 1px solid white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    animation: fadein 1.5s ease 2s 1 normal forwards;
+}
+
+.container input {
+    opacity: 0;
+    cursor: pointer;
+}
+
+.container span {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    user-select: none;
+}
+
+.container input:checked~span {
+    background-color: white;
+    color: black;
+}
