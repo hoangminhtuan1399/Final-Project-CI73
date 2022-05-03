@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import GameContext from '../Context/GameContext';
 import UserContext from '../Context/UserContext';
 
-const GameItem = ({game, name, highscore}) => {
+const GameItem = ({game, name, highscore, icon}) => {
     const userContext = useContext(UserContext);
     const gameContext = useContext(GameContext);
     const handlePlayGame = (game) => { 
@@ -17,7 +17,7 @@ const GameItem = ({game, name, highscore}) => {
                 {name}
             </div>
             <div className="game__icon">
-                <img alt='' src={require('../img/background_1.jpg')} />
+                <img alt='' src={icon} />
             </div>
             <div className="game_highscore">
                 Highscore: {highscore}
