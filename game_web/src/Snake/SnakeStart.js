@@ -172,8 +172,6 @@ const SnakeStart = ({ gameData, updateGameData }) => {
 
             const moveInterval = setInterval(moveSnake, gameData.speed);
 
-            console.log('running');
-
             return () => {
                 clearInterval(moveInterval);
             }
