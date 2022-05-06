@@ -15,7 +15,7 @@ const FishStart = () => {
     const [INITIAL_Y, setINITIAL_Y] = useState(32);
     const [isGameOver, setIsGameOver] = useState(false);
     const [SCORE, setSCORE] = useState(0);
-    const [SPEED, setSPEED] = useState(20);
+    const [SPEED, setSPEED] = useState(30);
     const [POSITION, setPOSITION] = useState(1);
     const [HIGHSCORE, setHIGHSCORE] = useState(userContext.currentUser.highscore.fish);
 
@@ -129,7 +129,7 @@ const FishStart = () => {
             for (let j = 0; j < ENEMY_DOT.length; j++) {
                 const enemyItem = ENEMY_DOT[j];
                 if (fishItem[0] === enemyItem[0] && fishItem[1] === enemyItem[1]) {
-                    gameOver();
+                    setIsGameOver(true);
                 };
             }
         };
@@ -137,7 +137,6 @@ const FishStart = () => {
 
     const gameOver = useCallback(() => {
         createEnemy();
-        setIsGameOver(true);
         setIsPlaying(false);
         setSCORE(0);
         setSPEED(20);
@@ -184,6 +183,13 @@ const FishStart = () => {
             }
         }
     }, [isPlaying, SPEED, INITIAL_X, enemyLength]);
+
+    //useEffect to end game
+    useEffect(() => {
+        if (isPlaying && isGameOver) {
+            gameOver();
+        }
+    }, [isGameOver, isPlaying]);
 
     //useEffect to changing position
     useEffect(() => {
