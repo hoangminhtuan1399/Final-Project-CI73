@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Net-Web-Game/static/css/main.830238c7.css",
-    "main.js": "/Net-Web-Game/static/js/main.b2eb69dd.js",
+    "main.js": "/Net-Web-Game/static/js/main.45a56a99.js",
     "static/media/undersea.gif": "/Net-Web-Game/static/media/undersea.f5b5bf778a632a835969.gif",
     "static/media/background.gif": "/Net-Web-Game/static/media/background.43cafcffbf996fc82307.gif",
     "static/media/sand.png": "/Net-Web-Game/static/media/sand.a6836db5e785f7b1789e.png",
@@ -9,10 +9,10 @@
     "static/media/arcade_n.TTF": "/Net-Web-Game/static/media/arcade_n.a5e35a469c649a22831b.TTF",
     "index.html": "/Net-Web-Game/index.html",
     "main.830238c7.css.map": "/Net-Web-Game/static/css/main.830238c7.css.map",
-    "main.b2eb69dd.js.map": "/Net-Web-Game/static/js/main.b2eb69dd.js.map"
+    "main.45a56a99.js.map": "/Net-Web-Game/static/js/main.45a56a99.js.map"
   },
   "entrypoints": [
     "static/css/main.830238c7.css",
-    "static/js/main.b2eb69dd.js"
+    "static/js/main.45a56a99.js"
   ]
 }
