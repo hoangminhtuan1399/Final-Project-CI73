@@ -16,12 +16,8 @@ const PlayPage = () => {
         userContext.updateLocal(userContext.userlist);
         userContext.setCurrentUser(
             {
-                username: '',
-                password: '',
+                ...userContext.initialUser,
                 isLogIn: false,
-                highscore: {
-                    snake: 0,
-                },
             }
         );
         Object.keys(gameContext).forEach((key) => {

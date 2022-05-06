@@ -3,7 +3,7 @@ import Whale from './Whale';
 import Shark from './Shark';
 import { useEffect } from "react";
 
-const Enemy = ({ INITIAL_X, INITIAL_Y, enemyId, getEnemyLength }) => {
+const Enemy = ({ INITIAL_X, INITIAL_Y, enemyId, getEnemyLength, getENEMY_DOT }) => {
 
     const createEnemy = () => {
         switch (enemyId) {
@@ -22,6 +22,7 @@ const Enemy = ({ INITIAL_X, INITIAL_Y, enemyId, getEnemyLength }) => {
 
     useEffect(() => {
         getEnemyLength(ENEMY_DOT[1]);
+        getENEMY_DOT(ENEMY_DOT[0]);
     }, [ENEMY_DOT])
 
     return (

@@ -1,12 +1,11 @@
 import GameItem from "./GameItem";
 import { useContext, } from "react";
 import UserContext from "../Context/UserContext";
-import GameContext from "../Context/GameContext";
 import snake_icon from "../img/snake_icon.jpg";
+import fish_icon from "../img/fish_icon.jpg";
 
 const GamePage = () => {
     const userContext = useContext(UserContext);
-    const gameContext = useContext(GameContext);
 
     const handleLogOut = () => {
         const userIndex = userContext.userlist.findIndex(item => item.username === userContext.currentUser.username);
@@ -14,12 +13,8 @@ const GamePage = () => {
         userContext.updateLocal(userContext.userlist);
         userContext.setCurrentUser(
             {
-                username: '',
-                password: '',
+                ...userContext.initialUser,
                 isLogIn: false,
-                highscore: {
-                    snake: 0,
-                },
             }
         );
     };
@@ -33,7 +28,7 @@ const GamePage = () => {
             </h6>
             <div className="game__container">
                 <GameItem icon={snake_icon} game="snakeGame" name="Snake Game" highscore={userContext.currentUser.highscore.snake}/>
-                <GameItem game="fishGame" name="Fish: No way home" highscore={userContext.currentUser.highscore.fish}/>
+                <GameItem icon={fish_icon} game="fishGame" name="Turtle way home" highscore={userContext.currentUser.highscore.fish}/>
             </div>
             <div>
                 <h6>Not you?

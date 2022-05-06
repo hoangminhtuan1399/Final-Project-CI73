@@ -210,7 +210,7 @@ form>.form__success {
 }
 
 .game__icon {
-    width: 100%;
+    max-width: 100%;
     height: 20rem;
 }
 

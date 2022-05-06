@@ -13,64 +13,12 @@ const FishStart = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [INITIAL_X, setINITIAL_X] = useState(120);
     const [INITIAL_Y, setINITIAL_Y] = useState(32);
-    const [isGameOver, setIsGameOver] = useState(true);
+    const [isGameOver, setIsGameOver] = useState(false);
     const [SCORE, setSCORE] = useState(0);
     const [SPEED, setSPEED] = useState(10);
     const [POSITION, setPOSITION] = useState(1);
     const [HIGHSCORE, setHIGHSCORE] = useState(userContext.currentUser.highscore.fish);
 
-    //function to move enemy
-    const moveEnemy = useCallback(() => {
-        setINITIAL_X(prev => prev - 2);
-    }, []);
-
-    //function to create random kind of enemy
-    const createEnemy = useCallback(() => {
-        setINITIAL_X(120);
-        setEnemyId(randomId());
-        setEnemyPosition(randomPosition());
-    }, []);
-
-
-    const randomId = useCallback(() => {
-        return Math.floor(Math.random() * 3);
-    }, []);
-    const [enemyId, setEnemyId] = useState(randomId());
-
-    //function to random enemy position
-    const randomPosition = useCallback(() => {
-        return Math.floor(Math.random() * 3);
-    }, []);
-    const [enemyPostion, setEnemyPosition] = useState(randomPosition());
-
-    useEffect(() => {
-        switch (enemyPostion) {
-            case 0:
-                setINITIAL_Y(17);
-                break;
-            case 1:
-                break;
-            case 2:
-                setINITIAL_Y(49);
-                break;
-            default:
-                break;
-        }
-    }, [enemyPostion]);
-
-    //function to get enemy's length and check if enemy out 
-    const [enemyLength, setEnemyLength] = useState(0);
-    const getEnemyLength = useCallback((length) => {
-        setEnemyLength(length);
-    }, []);
-
-    const checkEnemyOut = useCallback(() => {
-        if (INITIAL_X < (- enemyLength)) {
-            createEnemy();
-            setSCORE(prev => prev+100);
-            if ((SCORE+100)%500 === 0) setSPEED(prev => prev*0.5);
-        }
-    }, [INITIAL_X, enemyLength]);
 
     //draw fish (turtle) 
     const createFishBody = useCallback(() => {
@@ -113,29 +61,121 @@ const FishStart = () => {
         ]
     )
 
+    //function to move enemy
+    const moveEnemy = useCallback(() => {
+        setINITIAL_X(prev => prev - 2);
+    }, []);
+
+    //function to create random kind of enemy
+    const createEnemy = useCallback(() => {
+        setINITIAL_X(120);
+        setEnemyId(randomId());
+        setEnemyPosition(randomPosition());
+    }, []);
+
+
+    const randomId = useCallback(() => {
+        return Math.floor(Math.random() * 3);
+    }, []);
+    const [enemyId, setEnemyId] = useState(randomId());
+
+    //function to random enemy position
+    const randomPosition = useCallback(() => {
+        return Math.floor(Math.random() * 3);
+    }, []);
+    const [enemyPostion, setEnemyPosition] = useState(randomPosition());
+
+    useEffect(() => {
+        switch (enemyPostion) {
+            case 0:
+                setINITIAL_Y(14);
+                break;
+            case 1:
+                break;
+            case 2:
+                setINITIAL_Y(50);
+                break;
+            default:
+                break;
+        }
+    }, [enemyPostion]);
+
+    //function to get enemy's length and check if enemy out 
+    const [enemyLength, setEnemyLength] = useState(0);
+    const getEnemyLength = useCallback((length) => {
+        setEnemyLength(length);
+    }, []);
+
+    const checkEnemyOut = useCallback(() => {
+        if (INITIAL_X < (- enemyLength)) {
+            createEnemy();
+            setSCORE(prev => {
+                if ((prev + 100) > HIGHSCORE) setHIGHSCORE(prev + 100);
+                if ((prev + 100) % 500 === 0) setSPEED(SPEED*0.5);
+                return prev + 100;
+            });
+        }
+    }, [INITIAL_X, enemyLength]);
+
+    //function to check collision
+    const [ENEMY_DOT, setENEMY_DOT] = useState([]);
+    const getENEMY_DOT = useCallback((updated) => {
+        setENEMY_DOT(updated);
+    }, []);
+
+    const checkCollision = useCallback(() => {
+        for (let i = 0; i < FISH_DOT.length; i++) {
+            const fishItem = FISH_DOT[i];
+            for (let j = 0; j < ENEMY_DOT.length; j++) {
+                const enemyItem = ENEMY_DOT[j];
+                if (fishItem[0] === enemyItem[0] && fishItem[1] === enemyItem[1]) {
+                    gameOver();
+                };
+            }
+        };
+    }, [FISH_DOT, ENEMY_DOT]);
+
+    const gameOver = useCallback(() => {
+        setIsGameOver(true);
+        setIsPlaying(false);
+        setTimeout(() => {
+            createEnemy();
+            setSCORE(0);
+            setSPEED(10);
+            setPOSITION(1);
+            setIsGameOver(false);
+        }, 2000);
+        const userIndex = userContext.userlist.findIndex((item) => item.isLogIn === true);
+        userContext.userlist[userIndex].highscore.fish = HIGHSCORE;
+        userContext.updateLocal(userContext.userlist);
+    }, [HIGHSCORE]);
+
     //useEffect to start the game
     useEffect(() => {
-        const handleStartGame = (e) => {
-            if (e.code === 'Space') setIsPlaying(true);
-        };
+        if (!isGameOver) {
+            const handleStartGame = (e) => {
+                if (e.code === 'Space') setIsPlaying(true);
+            };
 
-        document.addEventListener('keydown', handleStartGame);
+            document.addEventListener('keydown', handleStartGame);
 
-        if (isPlaying) {
-            articleRef.current.style.animationPlayState = "running";
-        } else {
-            articleRef.current.style.animationPlayState = "paused";
+            if (isPlaying) {
+                articleRef.current.style.animationPlayState = "running";
+            } else {
+                articleRef.current.style.animationPlayState = "paused";
+            }
+
+            return () => {
+                document.removeEventListener('keydown', handleStartGame);
+            }
         }
-
-        return () => {
-            document.removeEventListener('keydown', handleStartGame);
-        }
-    }, [isPlaying])
+    }, [isPlaying, isGameOver])
 
     useEffect(() => {
         if (isPlaying) {
             const intervalMoveEnemy = setInterval(() => {
                 moveEnemy();
+                checkCollision();
                 checkEnemyOut();
             }, SPEED);
 
@@ -190,18 +230,19 @@ const FishStart = () => {
 
     return (
         <div className="fish__screen">
-            {!isPlaying && <span>Press Space to start {"\n"} Use Up Down to move</span>}
+            {!isPlaying && !isGameOver && <span>Press Space to start {"\n"} Use Up Down to move</span>}
+            {!isPlaying && isGameOver && <span className='fish__gameover'>Game Over</span>}
             <div className='fish__sea'>
                 <img className='undersea__gif' src={undersea} alt="" />
                 <span className='fish__score'>Score: {SCORE}</span>
                 <span className='fish__highscore'>HighScore: {HIGHSCORE}</span>
                 {isPlaying && <Fish FISH_DOT={FISH_DOT} />}
-                {isPlaying && <Enemy INITIAL_X={INITIAL_X} INITIAL_Y={INITIAL_Y} enemyId={enemyId} getEnemyLength={getEnemyLength} />}
+                {isPlaying && <Enemy INITIAL_X={INITIAL_X} INITIAL_Y={INITIAL_Y} enemyId={enemyId} getEnemyLength={getEnemyLength} getENEMY_DOT={getENEMY_DOT} />}
             </div>
             <div className='fish__ground'>
                 <article ref={articleRef}
                     style={{
-                        animation: `bannermove ${0.12 * SPEED}s linear 0s infinite normal none`,
+                        animation: `bannermove 4s linear 0s infinite normal none`,
                     }}>
                     <img alt='' src={sand} />
                     <img alt='' src={sand} />
