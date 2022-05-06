@@ -15,7 +15,7 @@ const FishStart = () => {
     const [INITIAL_Y, setINITIAL_Y] = useState(32);
     const [isGameOver, setIsGameOver] = useState(false);
     const [SCORE, setSCORE] = useState(0);
-    const [SPEED, setSPEED] = useState(10);
+    const [SPEED, setSPEED] = useState(20);
     const [POSITION, setPOSITION] = useState(1);
     const [HIGHSCORE, setHIGHSCORE] = useState(userContext.currentUser.highscore.fish);
 
@@ -63,7 +63,7 @@ const FishStart = () => {
 
     //function to move enemy
     const moveEnemy = useCallback(() => {
-        setINITIAL_X(prev => prev - 2);
+        setINITIAL_X(prev => prev - 4);
     }, []);
 
     //function to create random kind of enemy
@@ -111,7 +111,7 @@ const FishStart = () => {
             createEnemy();
             setSCORE(prev => {
                 if ((prev + 100) > HIGHSCORE) setHIGHSCORE(prev + 100);
-                if ((prev + 100) % 500 === 0) setSPEED(SPEED*0.5);
+                setSPEED(SPEED * 0.9);
                 return prev + 100;
             });
         }
@@ -133,28 +133,28 @@ const FishStart = () => {
                 };
             }
         };
-    }, [FISH_DOT, ENEMY_DOT]);
+    }, [FISH_DOT, ENEMY_DOT, isGameOver]);
 
     const gameOver = useCallback(() => {
+        createEnemy();
         setIsGameOver(true);
         setIsPlaying(false);
-        setTimeout(() => {
-            createEnemy();
-            setSCORE(0);
-            setSPEED(10);
-            setPOSITION(1);
-            setIsGameOver(false);
-        }, 2000);
+        setSCORE(0);
+        setSPEED(20);
+        setPOSITION(1);
+        setTimeout(() => setIsGameOver(false), 2000);
         const userIndex = userContext.userlist.findIndex((item) => item.isLogIn === true);
         userContext.userlist[userIndex].highscore.fish = HIGHSCORE;
         userContext.updateLocal(userContext.userlist);
-    }, [HIGHSCORE]);
+    }, [HIGHSCORE, isGameOver, isPlaying]);
 
     //useEffect to start the game
     useEffect(() => {
         if (!isGameOver) {
             const handleStartGame = (e) => {
-                if (e.code === 'Space') setIsPlaying(true);
+                if (e.code === 'Space') {
+                    setIsPlaying(true);
+                }
             };
 
             document.addEventListener('keydown', handleStartGame);
