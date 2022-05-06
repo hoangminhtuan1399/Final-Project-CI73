@@ -111,7 +111,7 @@ const FishStart = () => {
             createEnemy();
             setSCORE(prev => {
                 if ((prev + 100) > HIGHSCORE) setHIGHSCORE(prev + 100);
-                setSPEED(SPEED * 0.9);
+                setSPEED(SPEED * 0.95);
                 return prev + 100;
             });
         }
@@ -180,7 +180,7 @@ const FishStart = () => {
         if (isPlaying && isGameOver) {
                 setIsPlaying(false);
                 setSCORE(0);
-                setSPEED(20);
+                setSPEED(50);
                 setPOSITION(1);
                 setTimeout(() => setIsGameOver(false), 2000);
                 const userIndex = userContext.userlist.findIndex((item) => item.isLogIn === true);
