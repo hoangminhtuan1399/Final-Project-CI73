@@ -236,7 +236,7 @@ const FishStart = () => {
 
     return (
         <div className="fish__screen">
-            {!isPlaying && !isGameOver && <span>Press Space to start {"\n"} Use Up Down to move</span>}
+            {!isPlaying && !isGameOver && <span>Press Space to start {"\n"} Up Down to move</span>}
             {!isPlaying && isGameOver && <span className='fish__gameover'>Game Over</span>}
             <div className='fish__sea'>
                 <img className='undersea__gif' src={undersea} alt="" />
