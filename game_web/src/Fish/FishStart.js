@@ -129,30 +129,21 @@ const FishStart = () => {
             for (let j = 0; j < ENEMY_DOT.length; j++) {
                 const enemyItem = ENEMY_DOT[j];
                 if (fishItem[0] === enemyItem[0] && fishItem[1] === enemyItem[1]) {
+                    createEnemy();
                     setIsGameOver(true);
                 };
             }
         };
     }, [FISH_DOT, ENEMY_DOT, isGameOver]);
 
-    const gameOver = useCallback(() => {
-        createEnemy();
-        setIsPlaying(false);
-        setSCORE(0);
-        setSPEED(20);
-        setPOSITION(1);
-        setTimeout(() => setIsGameOver(false), 2000);
-        const userIndex = userContext.userlist.findIndex((item) => item.isLogIn === true);
-        userContext.userlist[userIndex].highscore.fish = HIGHSCORE;
-        userContext.updateLocal(userContext.userlist);
-    }, [HIGHSCORE, isGameOver, isPlaying]);
-
     //useEffect to start the game
     useEffect(() => {
         if (!isGameOver) {
             const handleStartGame = (e) => {
                 if (e.code === 'Space') {
-                    setIsPlaying(true);
+                    setTimeout(() => {
+                        setIsPlaying(true);
+                    }, 500);
                 }
             };
 
@@ -187,7 +178,14 @@ const FishStart = () => {
     //useEffect to end game
     useEffect(() => {
         if (isPlaying && isGameOver) {
-            gameOver();
+                setIsPlaying(false);
+                setSCORE(0);
+                setSPEED(20);
+                setPOSITION(1);
+                setTimeout(() => setIsGameOver(false), 2000);
+                const userIndex = userContext.userlist.findIndex((item) => item.isLogIn === true);
+                userContext.userlist[userIndex].highscore.fish = HIGHSCORE;
+                userContext.updateLocal(userContext.userlist);
         }
     }, [isGameOver, isPlaying]);
 
