@@ -15,7 +15,7 @@ const FishStart = () => {
     const [INITIAL_Y, setINITIAL_Y] = useState(32);
     const [isGameOver, setIsGameOver] = useState(false);
     const [SCORE, setSCORE] = useState(0);
-    const [SPEED, setSPEED] = useState(30);
+    const [SPEED, setSPEED] = useState(50);
     const [POSITION, setPOSITION] = useState(1);
     const [HIGHSCORE, setHIGHSCORE] = useState(userContext.currentUser.highscore.fish);
 

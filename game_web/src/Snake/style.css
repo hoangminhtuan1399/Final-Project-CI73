@@ -1,11 +1,9 @@
 @keyframes movedown {
     0% {
-        left: 0;
         top: 0;
     }
 
     100% {
-        left: 0;
         top: 10%
     }
 }
@@ -33,8 +31,8 @@
 }
 
 .index {
-    text-align: center;
-    font-size: 1rem;
+    display: grid;
+    place-items: center;
 }
 
 .game__screen {
@@ -46,6 +44,7 @@
     color: white;
     overflow: hidden;
     border: 3px solid white;
+    font-size: 1.6vh;
 }
 
 .game__score {
@@ -57,7 +56,7 @@
 
 .game__highscore {
     position: absolute;
-    top: 5%;
+    top: 6%;
     right: 5%;
     color: white;
 }
@@ -72,16 +71,16 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    font-size: 2.6rem;
+    font-size: 4vh;
 }
 
 .game__over--screen h1 {
-    transform: translateY(3rem);
+    transform: translateY(3vh);
     animation: fadein 1s ease-in 0s 1 normal forwards;
 }
 
 .game__over--screen h2 {
-    font-size: 1.7rem;
+    font-size: 2.5vh;
     cursor: pointer;
     animation: 
         fadein 1.8s ease 1.2s 1 normal both,
@@ -118,7 +117,9 @@
 
 .game__article {
     position: absolute;
-    font-size: 3rem;
+    left: 0;
+    right: 0;
+    font-size: 4vh;
     animation: movedown 1.5s ease-out 0s 1 normal forwards;
 }
 
@@ -127,7 +128,7 @@
     top: 80%;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 2rem;
+    font-size: 3vh;
     user-select: none;
     cursor: pointer;
     animation: 
@@ -137,13 +138,14 @@
 
 .game__option {
     visibility: hidden;
-    width: 65%;
-    height: 20%;
+    width: 70%;
+    height: 25%;
+    font-size: 2.1vh;
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translateX(-50%);
-    padding: 1rem;
+    padding: 1vh;
     border: 1px solid white;
     border-radius: 10px;
     display: flex;
@@ -161,9 +163,10 @@
     cursor: pointer;
     background-color: black;
     color: white;
-    padding: 1rem 2rem;
+    padding: 1.5vh 2.5vh;
     border-radius: 5px;
     user-select: none;
+    transition: 0.1s linear;
 }
 
 .container input:checked~span {

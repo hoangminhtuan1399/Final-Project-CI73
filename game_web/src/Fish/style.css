@@ -25,13 +25,12 @@
     border-radius: 10px;
     border: 2px solid black;
     overflow: hidden;
-    font-size: 62.5%;
     animation: fadein 0.6s ease-in 0s 1 normal forwards;
 }
 
 .fish__screen > span {
     position: absolute;
-    font-size: 2rem;
+    font-size: 3vh;
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -88,7 +87,7 @@
 
 .fish__score {
     position: absolute;
-    font-size: 1rem;
+    font-size: 1.5vh;
     top: 5%;
     left: 2%;
     color: darkblue;
@@ -99,7 +98,7 @@
     position: absolute;
     top: 9%;
     left: 2%;
-    font-size: 1rem;
+    font-size: 1.5vh;
     color: darkblue;
     z-index: 10;
 }
@@ -111,6 +110,6 @@
 }
 
 .fish__screen > .fish__gameover {
-    font-size: 3rem;
+    font-size: 3vh;
     animation: fadein 0.6s ease-in 0s 1 normal forwards;
 }
