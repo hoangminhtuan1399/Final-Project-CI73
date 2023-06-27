@@ -1,7 +1,7 @@
 {
   "name": "game_web",
   "version": "0.1.0",
-  "homepage": ".",
+  "homepage": "hoangminhtuan1399.github.io/net-web-game",
   "private": "false",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
